@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: {},
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+/* Arreglos del modal para backdrop */
+.modal {
+  background-color: rgba(0, 0, 0, 0.425);
 }
+
+.modal-open {
+  overflow: inherit;
+}
+
+/* Cursor para elementos */
+.cursor{
+  cursor: pointer;
+}
+
+/* Efecto poster peliculas */
+.poster-zoom {
+  transition: transform .2s;
+  transform: scale(0.9);
+}
+
+.poster-zoom:hover {
+  transform: scale(1); 
+}
+
 </style>
