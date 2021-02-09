@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- Formulario Inicio Sesión e imagenes -->
-    <div class="container">
+    <div class="container vertical-center">
       <div class="row">
         <div class="col-md-6">
-          <img
+          <img class="poster-zoom"
             src="https://d3avoj45mekucs.cloudfront.net/rojakdaily/media/iylia/lifestyle/nonetflix.jpg?ext=.jpg"
             width="100%"
           />
@@ -38,9 +38,9 @@
           </p>
         </div>
         <div class="col-md-6">
-          <img
+          <img class="poster-zoom"
             src="https://www.discoverboating.com/sites/default/files/inline-images/best-boat-movies.png"
-            height="100%"
+            width="100%"
           />
         </div>
       </div>
@@ -156,4 +156,12 @@ export default {
 </script>
 
 <style>
+
+.vertical-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 </style>

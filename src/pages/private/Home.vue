@@ -3,31 +3,33 @@
     <!-- Componente navbar -->
     <Navbar />
 
-    <div class="container" style="margin-top: 5rem">
-      <!-- Carrusel -->
-      <!-- Se crea un condicional para renderizar el componente carousel unicamente cuando la variables movies ya ha recibido datos en la peticion -->
-      <div v-if="movies.length > 0">
-        <carousel
-          :autoplay="true"
-          :items="4"
-          :margin="20"
-          :loop="true"
-          :mouseDrag="false"
-          :autoHeight="true"
-        >
-          <img
-            class="images poster-zoom"
-            v-for="item in movies"
-            :key="item.imdbID"
-            :src="item.Poster"
-            @click="$router.push({ path: `/movieDetail/${item.imdbID}` })"
-          />
-        </carousel>
+    <section class="section-carousel">
+      <div class="container" style="padding-top: 5rem">
+        <!-- Carrusel -->
+        <!-- Se crea un condicional para renderizar el componente carousel unicamente cuando la variables movies ya ha recibido datos en la peticion -->
+        <div v-if="movies.length > 0">
+          <carousel
+            :autoplay="true"
+            :items="4"
+            :margin="20"
+            :loop="true"
+            :mouseDrag="false"
+            :autoHeight="true"
+          >
+            <img
+              class="images poster-zoom"
+              v-for="item in movies"
+              :key="item.imdbID"
+              :src="item.Poster"
+              @click="$router.push({ path: `/movieDetail/${item.imdbID}` })"
+            />
+          </carousel>
+        </div>
       </div>
+    </section>
 
-      <div class="mt-4">
-        <SearchMovie />
-      </div>
+    <div class="mt-4">
+      <SearchMovie />
     </div>
   </div>
 </template>
@@ -74,12 +76,47 @@ export default {
 
 <style>
 /* Arreglos para las imagenes en owl carousel del mismo tamaño */
+
 .owl-carousel .owl-stage {
   display: flex;
+  /* height: 18rem; */
 }
 
 .owl-carousel .owl-item img {
   width: 100%;
   height: 100%;
+}
+
+.section-carousel {
+  background-color: #f6f5f5;
+}
+
+/* Cambio de texto y diseño en botones owl carousel */
+.owl-prev {
+  visibility: hidden;
+  position: relative;
+}
+.owl-prev:after {
+  display: inline-block;
+  background: #1687a7;
+  border-radius: 4px;
+  color: #fff;
+  padding: 8px 12px;
+  visibility: visible;
+  content: "Anterior";
+}
+
+.owl-next {
+  visibility: hidden;
+  position: relative;
+}
+.owl-next:after {
+  display: inline-block;
+  background: #1687a7;
+  border-radius: 4px;
+  color: #fff;
+  padding: 8px 12px;
+  visibility: visible;
+  content: "Siguiente";
 }
 </style>
