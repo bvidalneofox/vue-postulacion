@@ -20,7 +20,8 @@
               class="images poster-zoom"
               v-for="item in movies"
               :key="item.imdbID"
-              :src="item.Poster"
+              :src="item.Poster | detectImage"
+              data-test="recomendados"
               @click="$router.push({ path: `/movieDetail/${item.imdbID}` })"
             />
           </carousel>
@@ -59,7 +60,7 @@ export default {
   methods: {
     getRecomendados() {
       axios
-        .get(`http://www.omdbapi.com/?apikey=12a4becc&s=jason`)
+        .get(`http://www.omdbapi.com/?apikey=12a4becc&s=Jason`)
         .then((res) => {
           this.movies = res.data.Search;
           console.log(this.movies);

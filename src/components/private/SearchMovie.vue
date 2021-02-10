@@ -3,7 +3,10 @@
     <div class="container">
       <div class="card mb-4 border-0">
         <div class="card-header text-center border-0">
-          <h3>Buscador Peliculas</h3>
+          <h3>
+            Buscador Peliculas
+            <i v-if="loading" class="fas fa-spinner fa-spin"></i>
+          </h3>
         </div>
         <div class="card-body">
           <input
@@ -31,17 +34,18 @@
                 </p>
               </div>
 
-              <div v-if="noResults" class="alert alert-success" role="alert">
+              <div v-show="noResults" class="alert alert-success" role="alert">
                 <h4 class="alert-heading">No se han encontrado resultados</h4>
                 <p>
-                  Puede que el nombre este mal escrito o no exista en nustra base de datos
+                  Puede que el nombre este mal escrito o no exista en nustra
+                  base de datos
                 </p>
                 <hr />
                 <p class="mb-0">
-                  Prueba buscando otra pelicula o comprueba que lo hayas escrito bien
+                  Prueba buscando otra pelicula o comprueba que lo hayas escrito
+                  bien
                 </p>
               </div>
-
             </div>
           </paginate>
           <paginate-links
@@ -69,9 +73,9 @@ export default {
       noResults: false,
       movies: [],
       paginate: ["movies"],
+      loading: false,
     };
   },
-  components: {},
   methods: {
     submitSearch() {
       this.noResults = false;
@@ -88,9 +92,9 @@ export default {
           }
 
           // Bajar automaticamente al encontrar respuesta del servidor (set time out para evitar que quede a mitad del div al no estar generado a tiempo)
-            setTimeout(() => {
-              window.scrollTo(0, document.body.scrollHeight);
-            }, 250);
+          setTimeout(() => {
+            window.scrollTo(0, document.body.scrollHeight);
+          }, 250);
         })
         .catch((error) => {
           Swal.fire("error", "Ha ocurrido un error en la busqueda", "error");
@@ -98,6 +102,7 @@ export default {
           console.log(error);
         })
         .finally(() => {
+          this.loading = false;
           // Arreglar bug del paginador al momento de limpiar el array movies
           if (this.$refs.paginator) {
             this.$refs.paginator.goToPage(1);
@@ -110,6 +115,8 @@ export default {
     },
     // Delay al keyup para no realizar demasiadas peticiones con cada key up
     delayKeyUp(ms) {
+      this.loading = true;
+
       if (this.timer) {
         window.clearTimeout(this.timer);
       }
@@ -122,6 +129,13 @@ export default {
 </script>
 
 <style>
+
+/* Arreglo a la etiqueta paginate que trae un padding por defecto */
+ul{
+      padding-inline-start: 0px;
+}
+
+/* Diseño adicional del paginador */
 .paginate-links li {
   cursor: pointer;
 }
@@ -130,7 +144,8 @@ export default {
   height: 80%;
 }
 
-.alert{
+/* Diseño mensaje alerta not found movies */
+.alert {
   border-radius: 20px;
   background-color: #1687a7;
   color: white;

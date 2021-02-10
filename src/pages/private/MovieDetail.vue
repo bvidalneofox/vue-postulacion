@@ -4,7 +4,12 @@
     <Navbar />
 
     <div class="container movie-details">
-      <div class="row">
+      <div v-if="loading" class="row">
+        <div class="col-12 text-center">
+          <p class="h2 fw-bold">Cargando... <i class="fas fa-spinner fa-spin"></i></p>
+        </div>
+      </div>
+      <div v-if="!loading" class="row">
         <div class="col-md-6 text-center">
           <img
             class="img-detail"
@@ -20,7 +25,7 @@
           <p><b class="text-muted">Género: </b>{{ movie.Genre }}</p>
           <p><b class="text-muted">Actores: </b>{{ movie.Actors }}</p>
           <div class="d-grid mb-auto">
-            <button class="btn btn-primary" @click="$router.push('/home')">
+            <button class="btn btn-primary btn-volver" @click="$router.push('/home')">
               Volver
             </button>
           </div>
@@ -32,7 +37,6 @@
 
 <script>
 import axios from "axios";
-import Swal from "sweetalert2";
 import Navbar from "../../components/private/Navbar";
 
 export default {
@@ -42,6 +46,7 @@ export default {
   data() {
     return {
       movie: {},
+      loading: false
     };
   },
   mounted() {
@@ -49,6 +54,7 @@ export default {
   },
   methods: {
     getMovieById(id) {
+      this.loading = true;
       axios
         .get(`http://www.omdbapi.com/?apikey=12a4becc&i=${id}`)
         .then((res) => {
@@ -56,10 +62,11 @@ export default {
           console.log(this.movie);
         })
         .catch((error) => {
-          Swal.fire("error", "Ha ocurrido un error en la busqueda", "error");
           console.log(error);
         })
-        .finally(() => {});
+        .finally(() => {
+          this.loading = false;
+        });
     },
   },
 };

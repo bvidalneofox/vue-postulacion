@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="#"
+      <a class="navbar-brand"
         ><b>{{ $route.name }}</b></a
       >
       <button
@@ -44,6 +44,7 @@
 
 <script>
 export default {
+  name: 'Navbar',
   methods: {
     cerrarSesion() {
       localStorage.clear("token");

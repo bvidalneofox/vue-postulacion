@@ -4,11 +4,12 @@
     <div class="container vertical-center">
       <div class="row">
         <div class="col-md-6">
-          <img class="poster-zoom"
-            src="https://d3avoj45mekucs.cloudfront.net/rojakdaily/media/iylia/lifestyle/nonetflix.jpg?ext=.jpg"
+          <img
+            class="poster-zoom"
+            src="@/assets/login-1.jpg"
             width="100%"
           />
-          <form v-on:submit.prevent="submitLogin">
+          <form id="form-login" @submit.prevent="submitLogin()">
             <input
               type="text"
               placeholder="E-mail"
@@ -22,14 +23,21 @@
               v-model="form.password"
             />
             <div class="d-grid mt-2">
-              <button type="submit" class="btn btn-primary" :disabled="loading">
-                Iniciar Sesión <i v-if="loading" class="fas fa-spinner fa-spin"></i>
+              <button
+                type="submit"
+                class="btn btn-primary button-login"
+                :disabled="loading"
+              >
+                <span v-if="!loading">Iniciar Sesión</span>
+                <span v-if="loading">Cargando</span>
+                <i v-if="loading" class="fas fa-spinner fa-spin"></i>
               </button>
             </div>
           </form>
           <p class="mt-2 text-center">
             ¿No tienes cuenta?
-            <a class="link-modal cursor"
+            <a
+              class="link-modal cursor"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
               data-bs-backdrop="false"
@@ -38,8 +46,9 @@
           </p>
         </div>
         <div class="col-md-6">
-          <img class="poster-zoom"
-            src="https://www.discoverboating.com/sites/default/files/inline-images/best-boat-movies.png"
+          <img
+            class="poster-zoom"
+            src="@/assets/login-2.png"
             width="100%"
           />
         </div>
@@ -156,7 +165,6 @@ export default {
 </script>
 
 <style>
-
 .vertical-center {
   position: absolute;
   top: 50%;
@@ -164,4 +172,7 @@ export default {
   transform: translate(-50%, -50%);
 }
 
+.modal-content{
+  border-radius: 20px;
+}
 </style>
