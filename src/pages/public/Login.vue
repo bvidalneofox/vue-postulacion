@@ -115,8 +115,8 @@ export default {
       // Loading para bloquear el boton de logina al hacer click y mostrar animacion
       loading: false,
       form: {
-        email: "eve.holt@reqres.in",
-        password: "cityslicka",
+        email: "",
+        password: "",
       },
     };
   },
